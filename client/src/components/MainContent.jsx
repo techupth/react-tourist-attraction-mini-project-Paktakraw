@@ -10,7 +10,7 @@ function MainContent() {
     const result = await axios.get(
       `http://localhost:4001/trips?keywords=${searchText}`
     );
-    console.log(result);
+    // console.log(result);
     setTouristData(result.data.data);
   };
 
@@ -18,8 +18,26 @@ function MainContent() {
     getTouristData();
   }, [searchText]);
 
+  const getDescription = (description) => {
+    if (description.length > 100) {
+      return description.substring(0, 100) + "...";
+    } else {
+      return description.substring(0, 100);
+    }
+  };
+
   const handleSearchText = (event) => {
     setSearchText(event.target.value);
+  };
+
+  const handleTagClick = (tag) => {
+    setSearchText((prevText) => {
+      if (prevText) {
+        return `${prevText} ${tag}`;
+      } else {
+        return tag;
+      }
+    });
   };
 
   return (
@@ -47,11 +65,9 @@ function MainContent() {
               img3={item.photos[3]}
               contentName={item.title}
               category={item.tags}
-              description={
-                item.description.substring(0, 100) +
-                (item.description.length > 100 ? "..." : "")
-              }
+              description={getDescription(item.description)}
               link={item.url}
+              onTagClick={handleTagClick}
             />
           );
         })}

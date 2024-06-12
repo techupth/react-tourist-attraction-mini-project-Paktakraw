@@ -10,6 +10,10 @@ function TouristCard(props) {
     alert("Copied to clipboard!");
   };
 
+  const handleTagClick = (tag) => {
+    props.onTagClick(tag);
+  };
+
   return (
     <div className="flex w-[95%] mx-auto mt-[40px] gap-10 items-center justify-center p-3">
       <div>
@@ -32,8 +36,18 @@ function TouristCard(props) {
           อ่านต่อ
         </a>
         <h4 className="text-gray-400">
-          หมวด <span>{props.category.join(" ")}</span>
-        </h4>
+          หมวด{" "}
+          {props.category.map((tag, index) => (
+            <span
+              key={index}
+              className="cursor-pointer hover:text-black"
+              onClick={() => handleTagClick(tag)}
+            >
+              {tag}
+              {index < props.category.length - 1 && " "}
+            </span>
+          ))}
+        </h4>{" "}
         <div className="flex gap-5 mt-5">
           <img
             className="object-cover h-[80px] w-[80px] rounded-[10px]"
