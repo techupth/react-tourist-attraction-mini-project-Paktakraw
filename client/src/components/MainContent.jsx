@@ -19,10 +19,10 @@ function MainContent() {
   }, [searchText]);
 
   const getDescription = (description) => {
-    if (description.length > 100) {
-      return description.substring(0, 100) + "...";
+    if (description.length > 90) {
+      return description.substring(0, 90) + "...";
     } else {
-      return description.substring(0, 100);
+      return description.substring(0, 90);
     }
   };
 
@@ -41,12 +41,12 @@ function MainContent() {
   };
 
   return (
-    <section className="mb-[40px]">
-      <div className="flex flex-col items-center justify-center">
-        <div className="w-[1400px] mx-auto">
-          <h3 className="text-[18px]">ค้นหาที่เที่ยว</h3>
+    <section className="mb-[40px] w-[100%] flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center mt-[60px] w-[90%]">
+        <div>
+          <h3 className="text-[30px] text-center">ค้นหาที่เที่ยว</h3>
           <input
-            className="border-b-2 decorate-none w-[1400px] mt-[30px] text-center focus:outline-none focus:placeholder-transparent"
+            className="border-b-2 decorate-none w-[300px] mt-[30px] text-center md:w-[600px] focus:outline-none focus:placeholder-transparent md:text-[18px] lg:w-[800px] xl:w-[1100px]"
             type="text"
             placeholder="หาที่เที่ยวแล้วไปกัน..."
             value={searchText}
@@ -54,7 +54,7 @@ function MainContent() {
           />
         </div>
       </div>
-      <div>
+      <div className="w-[90%]">
         {touristData.map((item) => {
           return (
             <TouristCard
